@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zoya Farooqi | Portfolio</title>
+  <style>
+    :root {
+      --bg-light: linear-gradient(135deg, #fdf0f3, #ffe8ec);
+      --bg-dark: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+      --text-light: #333;
+      --text-dark: #f9f9f9;
+      --primary-color: #f48fb1;
+      --hover-color: #c2185b;
+      --section-bg: rgba(255, 255, 255, 0.8);
+      --section-dark: rgba(34, 34, 34, 0.85);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg-light);
+      color: var(--text-light);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    nav {
+      background: var(--primary-color);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    nav a, nav button {
+      color: white;
+      margin: 5px 10px;
+      text-decoration: none;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s, transform 0.2s;
+    }
+
+    nav a:hover, nav button:hover {
+      color: var(--hover-color);
+      transform: scale(1.05);
+    }
+
+    section {
+      padding: 80px 20px;
+      border-bottom: 1px solid #eee;
+      background: var(--section-bg);
+      transition: background 0.3s;
+    }
+
+    .dark section {
+      background: var(--section-dark);
+    }
+
+    h1, h2 {
+      color: var(--primary-color);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 0 15px;
+    }
+
+    #adminPanel {
+      display: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav a, nav button {
+        margin: 5px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><strong>Zoya Farooqi</strong></div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <a href="#admin">Admin</a>
+      <button id="themeToggle">Toggle Theme</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Hi, I'm <strong>Zoya Farooqi</strong> — a passionate UI/UX designer and budding web developer. I love crafting user-friendly, aesthetic designs with a focus on functionality. I am currently pursuing <strong>BTech in Computer Science</strong> from <strong>Integral University, Lucknow</strong> (Batch 2026), and currently residing in Lucknow. I'm on a journey of learning and growing in the tech world, one pixel at a time!</p>
+    </section>
+
+   <section id="projects">
+  <h2>Projects</h2>
+  <div>
+    <h3>E-commerce Website</h3>
+    <p>This project is a full-featured e-commerce clothing platform created using <strong>Bootstrap 5</strong>. It features:
+      <ul>
+        <li>A pastel-themed hero section with modern typography and welcoming vibes</li>
+        <li>Product cards with responsive layout for jackets, hoodies, and t-shirts</li>
+        <li>Integrated contact form, feedback section, and image gallery</li>
+        <li>Sticky navbar, smooth scrolling, and polished shadow effects</li>
+        <li>Fully mobile-responsive design and soft UI perfect for fashion brands</li>
+      </ul>
+      The site demonstrates a blend of clean layout and playful UI ideal for modern online stores.
+    </p>
+  </div>
+  <div>
+    <h3>Flower Shop UI Project</h3>
+    <p>This HTML & CSS-based flower shop landing page showcases:
+      <ul>
+        <li>Elegant dropdown navigation and engaging hero image</li>
+        <li>Product display cards with hover interactions</li>
+        <li>Customer reviews styled with star ratings</li>
+        <li>Soft color palette and floral theme</li>
+        <li>Designed for responsive behavior and aesthetic appeal</li>
+      </ul>
+      Perfect for florists or small businesses looking for a visually soothing presentation.
+    </p>
+  </div>
+</section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <form onsubmit="saveMessage(event)">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <section id="admin">
+      <h2>Admin Login</h2>
+      <div id="adminLogin">
+        <input type="password" id="adminPass" placeholder="Enter admin password" />
+        <button onclick="loginAdmin()">Login</button>
+      </div>
+      <div id="adminPanel">
+        <h3>User Responses</h3>
+        <ul id="responseList"></ul>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "admin123";
+    const toggleBtn = document.getElementById("themeToggle");
+
+    toggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+    });
+
+    function saveMessage(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
+      const time = new Date().toLocaleString();
+
+      const entry = { name, email, message, time };
+      let entries = JSON.parse(localStorage.getItem("messages")) || [];
+      entries.push(entry);
+      localStorage.setItem("messages", JSON.stringify(entries));
+
+      console.log("New message saved:", entry);
+      alert("Message saved!");
+      document.querySelector("form").reset();
+    }
+
+    function loginAdmin() {
+      const pass = document.getElementById("adminPass").value;
+      if (pass === ADMIN_PASSWORD) {
+        document.getElementById("adminLogin").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        displayResponses();
+      } else {
+        alert("Incorrect password");
+      }
+    }
+
+    function displayResponses() {
+      const list = document.getElementById("responseList");
+      const entries = JSON.parse(localStorage.getItem("messages")) || [];
+      list.innerHTML = "";
+      entries.forEach(e => {
+        const li = document.createElement("li");
+        li.innerText = `${e.time} - ${e.name} (${e.email}): ${e.message}`;
+        list.appendChild(li);
+      });
+      console.log("All messages:", entries);
+    }
+  </script>
+</body>
+</html>
