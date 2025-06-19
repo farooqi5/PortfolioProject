@@ -1,6 +1,6 @@
 # 💖 Zoya Farooqi - Portfolio Website
 
-A pastel-themed, single-page portfolio built using **HTML, CSS, JavaScript**, and **Bootstrap 5**.
+A pastel-themed, single-page portfolio built using **HTML, CSS, JavaScript**
 
 ## ✨ Features
 - Light/Dark mode toggle
